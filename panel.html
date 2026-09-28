@@ -1,176 +1,20 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Luck Pro — Admin Panel</title>
-<style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#07111f;color:#fff}
-header{height:70px;background:#0d1b2d;border-bottom:1px solid #223651;display:flex;align-items:center;justify-content:space-between;padding:0 25px}
-.logo{font-size:23px;font-weight:800}.logo span{color:#6ee7b7}
-.container{display:flex;min-height:calc(100vh - 70px)}
-.sidebar{width:230px;background:#0a1727;border-right:1px solid #223651;padding:20px}
-.sidebar button{width:100%;padding:13px;margin-bottom:8px;background:transparent;color:#b5c4d8;border:0;border-radius:8px;text-align:left;cursor:pointer}
-.sidebar button.active,.sidebar button:hover{background:#132943;color:#fff}
-main{flex:1;padding:30px;max-width:1100px}.section{display:none}.section.active{display:block}
-h1{margin-top:0}.muted{color:#9fb0c7}.card{background:#0e1d30;border:1px solid #223651;border-radius:15px;padding:22px;margin-bottom:18px}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.stat strong{font-size:30px;display:block;margin-top:8px}
-label{display:block;color:#cbd7e6;font-size:14px;margin:15px 0 7px}
-input,select{width:100%;padding:12px;background:#07111f;color:#fff;border:1px solid #29415f;border-radius:8px}
-.btn{border:0;border-radius:8px;padding:11px 16px;background:linear-gradient(135deg,#6ee7b7,#60a5fa);font-weight:700;cursor:pointer;color:#06111d}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:15px}.task{display:flex;justify-content:space-between;padding:13px;border-bottom:1px solid #223651}
-.message{color:#6ee7b7;min-height:20px;margin-top:12px}
-@media(max-width:700px){.sidebar{width:70px;padding:10px}.sidebar button{font-size:0;text-align:center}.sidebar button:before{content:"•";font-size:20px}.grid,.row{grid-template-columns:1fr}main{padding:18px}}
-</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Luck Pro — Control Panel</title>
+<link rel="stylesheet" href="styles.css">
 </head>
-<body>
-
-<header>
-  <div class="logo">LUCK <span>PRO</span></div>
-  <div class="muted">Admin Control Panel</div>
-</header>
-
-<div class="container">
-<aside class="sidebar">
-  <button class="active" onclick="show('overview',this)">Dashboard</button>
-  <button onclick="show('customize',this)">Customize</button>
-  <button onclick="show('tasks',this)">Tasks</button>
-  <button onclick="show('settings',this)">Settings</button>
-</aside>
-
-<main>
-
-<section id="overview" class="section active">
-<h1>Dashboard</h1>
-<p class="muted">Luck Pro website overview.</p>
-<div class="grid">
-  <div class="card stat"><span class="muted">Members</span><strong id="members">128</strong></div>
-  <div class="card stat"><span class="muted">Tasks</span><strong id="taskCount">3</strong></div>
-  <div class="card stat"><span class="muted">Points issued</span><strong>12,450</strong></div>
+<body class="auth-page">
+<div class="auth-wrap">
+  <div class="auth-card">
+    <div class="brand center">LUCK <span>PRO</span></div>
+    <h1>Control Panel</h1>
+    <p class="muted">Demo admin panel for customizing tasks, members and reward settings.</p>
+    <a class="btn full" href="admin.html">Open Admin Panel</a>
+    <p class="note">For production, protect this route with server-side admin authentication.</p>
+  </div>
 </div>
-<div class="card">
-<h3>Quick information</h3>
-<p class="muted">Use Customize to change your website branding and Tasks to manage the reward task list.</p>
-</div>
-</section>
-
-<section id="customize" class="section">
-<h1>Customize Website</h1>
-<div class="card">
-<label>Website Name</label>
-<input id="siteName" value="Luck Pro">
-
-<label>Logo Text</label>
-<input id="logoText" value="LUCK PRO">
-
-<label>Accent Color</label>
-<input id="accent" type="color" value="#6ee7b7">
-
-<label>Website Tagline</label>
-<input id="tagline" value="Rewards & Referral Hub">
-
-<br><br>
-<button class="btn" onclick="saveCustomize()">Save Changes</button>
-<div id="customMessage" class="message"></div>
-</div>
-</section>
-
-<section id="tasks" class="section">
-<h1>Manage Tasks</h1>
-<div class="card">
-<div class="row">
-<div>
-<label>Task Name</label>
-<input id="newTask" placeholder="e.g. Daily Check-in">
-</div>
-<div>
-<label>Reward Points</label>
-<input id="newPoints" type="number" value="10">
-</div>
-</div>
-<br>
-<button class="btn" onclick="addTask()">Add Task</button>
-</div>
-
-<div class="card">
-<h3>Current Tasks</h3>
-<div id="taskList">
-<div class="task"><span>Daily Check-in</span><b>10 points</b></div>
-<div class="task"><span>Complete Profile</span><b>50 points</b></div>
-<div class="task"><span>Community Guide</span><b>20 points</b></div>
-</div>
-</div>
-</section>
-
-<section id="settings" class="section">
-<h1>Settings</h1>
-<div class="card">
-<label>Referral Reward</label>
-<input id="refReward" type="number" value="100">
-
-<label>Minimum Withdrawal Points</label>
-<input id="minimum" type="number" value="1000">
-
-<label>Currency</label>
-<select id="currency">
-<option>Points</option>
-<option>PKR</option>
-</select>
-
-<br><br>
-<button class="btn" onclick="saveSettings()">Save Settings</button>
-<div id="settingsMessage" class="message"></div>
-</div>
-</section>
-
-</main>
-</div>
-
-<script>
-function show(id,btn){
- document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));
- document.getElementById(id).classList.add('active');
- document.querySelectorAll('.sidebar button').forEach(x=>x.classList.remove('active'));
- btn.classList.add('active');
-}
-
-function saveCustomize(){
- const name=document.getElementById('siteName').value;
- const color=document.getElementById('accent').value;
- localStorage.setItem('luckProSettings',JSON.stringify({
-   siteName:name,
-   logo:document.getElementById('logoText').value,
-   color:color,
-   tagline:document.getElementById('tagline').value
- }));
- document.documentElement.style.setProperty('--accent',color);
- document.getElementById('customMessage').textContent='Changes saved in this browser demo.';
-}
-
-function addTask(){
- const name=document.getElementById('newTask').value.trim();
- const points=document.getElementById('newPoints').value;
- if(!name)return;
- const div=document.createElement('div');
- div.className='task';
- div.innerHTML='<span>'+escapeHtml(name)+'</span><b>'+escapeHtml(points)+' points</b>';
- document.getElementById('taskList').appendChild(div);
- document.getElementById('newTask').value='';
- document.getElementById('taskCount').textContent=document.querySelectorAll('#taskList .task').length;
-}
-
-function saveSettings(){
- localStorage.setItem('luckProRewardSettings',JSON.stringify({
-  referralReward:document.getElementById('refReward').value,
-  minimumWithdrawal:document.getElementById('minimum').value,
-  currency:document.getElementById('currency').value
- }));
- document.getElementById('settingsMessage').textContent='Settings saved in this browser demo.';
-}
-
-function escapeHtml(s){
- return s.replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
-}
-</script>
 </body>
 </html>
