@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Luck Pro — Account</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="auth-page">
+  <div class="auth-wrap">
+    <a class="brand center" href="index.html">LUCK <span>PRO</span></a>
+    <div class="auth-card">
+      <div class="tabs">
+        <button id="loginTab" class="active">Login</button>
+        <button id="signupTab">Signup</button>
+      </div>
+
+      <form id="loginForm">
+        <h1>Welcome Back</h1>
+        <p class="muted">Sign in to your member dashboard.</p>
+        <label>Email Address<input id="loginEmail" type="email" required></label>
+        <label>Password<input id="loginPassword" type="password" required minlength="6"></label>
+        <button class="btn full" type="submit">Login</button>
+      </form>
+
+      <form id="signupForm" hidden>
+        <h1>Create Account</h1>
+        <p class="muted">Create a demo member account.</p>
+        <label>Full Name<input id="name" required></label>
+        <label>Email Address<input id="email" type="email" required></label>
+        <label>Password<input id="password" type="password" required minlength="6"></label>
+        <label>Referral Code<input id="ref" placeholder="Optional"></label>
+        <button class="btn full" type="submit">Create Account</button>
+      </form>
+      <p id="message" class="message"></p>
+      <p class="note">Frontend demo only. For production, use a secure server-side authentication provider.</p>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

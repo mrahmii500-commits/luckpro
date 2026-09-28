@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Luck Pro — Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">LUCK <span>PRO</span></div>
+    <nav><a href="index.html">Home</a><button id="logout" class="link-btn">Logout</button></nav>
+  </header>
+
+  <main class="dashboard">
+    <div class="welcome">
+      <div><p class="eyebrow">MEMBER DASHBOARD</p><h1>Hi, <span id="userName">Member</span> 👋</h1><p class="muted">Track your points, tasks and referrals.</p></div>
+      <div class="avatar" id="avatar">M</div>
+    </div>
+
+    <section class="stats">
+      <div class="stat"><span>Points</span><strong id="points">0</strong></div>
+      <div class="stat"><span>Referrals</span><strong id="referrals">0</strong></div>
+      <div class="stat"><span>Completed Tasks</span><strong id="tasks">0</strong></div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head"><div><h2>Your referral link</h2><p class="muted">Share this link with friends who choose to join.</p></div><button id="copyRef" class="btn small">Copy</button></div>
+      <div class="refbox" id="refLink"></div>
+    </section>
+
+    <section class="two-col">
+      <div class="panel">
+        <div class="panel-head"><h2>Available tasks</h2></div>
+        <div id="taskList" class="task-list"></div>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h2>Recent activity</h2></div>
+        <div id="activity" class="activity"></div>
+      </div>
+    </section>
+  </main>
+  <script src="dashboard.js"></script>
+</body>
+</html>

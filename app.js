@@ -1,0 +1,8 @@
+const $=id=>document.getElementById(id);
+const loginTab=$("loginTab"),signupTab=$("signupTab"),loginForm=$("loginForm"),signupForm=$("signupForm"),message=$("message");
+function show(mode){const s=mode==="signup";loginTab.classList.toggle("active",!s);signupTab.classList.toggle("active",s);loginForm.hidden=s;signupForm.hidden=!s;message.textContent=""}
+loginTab.onclick=()=>show("login"); signupTab.onclick=()=>show("signup");
+const params=new URLSearchParams(location.search); if(params.get("mode")==="signup")show("signup");
+$("ref").value=params.get("ref")||"";
+loginForm.onsubmit=e=>{e.preventDefault();const email=$("loginEmail").value.trim();const users=JSON.parse(localStorage.getItem("luckProUsers")||"[]");const u=users.find(x=>x.email===email);if(!u){message.textContent="Demo account not found. Please signup first.";return}localStorage.setItem("luckProCurrent",JSON.stringify(u));location.href="dashboard.html"};
+signupForm.onsubmit=e=>{e.preventDefault();const user={id:crypto.randomUUID(),name:$("name").value.trim(),email:$("email").value.trim(),password:$("password").value,ref:$("ref").value.trim(),points:100,referrals:0,tasks:0,code:Math.random().toString(36).slice(2,8).toUpperCase(),activity:["Account created"]};const users=JSON.parse(localStorage.getItem("luckProUsers")||"[]");if(users.some(x=>x.email===user.email)){message.textContent="An account with this email already exists.";return}users.push(user);localStorage.setItem("luckProUsers",JSON.stringify(users));localStorage.setItem("luckProCurrent",JSON.stringify(user));location.href="dashboard.html"};

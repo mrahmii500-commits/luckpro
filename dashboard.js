@@ -1,0 +1,10 @@
+const current=JSON.parse(localStorage.getItem("luckProCurrent")||"null");if(!current){location.href="auth.html";throw new Error("Not logged in")}
+const $=id=>document.getElementById(id);$("userName").textContent=current.name||"Member";$("avatar").textContent=(current.name||"M").charAt(0).toUpperCase();$("points").textContent=current.points||0;$("referrals").textContent=current.referrals||0;$("tasks").textContent=current.tasks||0;
+const base=location.origin+location.pathname.replace(/\/[^\/]*$/,"/");$("refLink").textContent=base+"auth.html?mode=signup&ref="+current.code;
+$("copyRef").onclick=async()=>{await navigator.clipboard.writeText($("refLink").textContent);$("copyRef").textContent="Copied!"};
+const tasks=[["Daily check-in",10],["Complete profile",50],["Read community guide",20]];
+$("taskList").innerHTML=tasks.map((t,i)=>`<div class="task"><div><p>${t[0]}</p><small>Reward: ${t[1]} points</small></div><button class="btn small" onclick="completeTask(${i})">Complete</button></div>`).join("");
+function completeTask(i){const [name,reward]=tasks[i];current.points=(current.points||0)+reward;current.tasks=(current.tasks||0)+1;current.activity=[`Completed ${name} (+${reward})`,...(current.activity||[])].slice(0,8);save();renderActivity();alert(`${reward} points added in this demo.`)}
+function save(){localStorage.setItem("luckProCurrent",JSON.stringify(current));const users=JSON.parse(localStorage.getItem("luckProUsers")||"[]");const n=users.findIndex(x=>x.id===current.id);if(n>=0)users[n]=current;localStorage.setItem("luckProUsers",JSON.stringify(users));$("points").textContent=current.points;$("tasks").textContent=current.tasks}
+function renderActivity(){$("activity").innerHTML=(current.activity||["No activity yet"]).map(x=>`<div>${x}</div>`).join("")}renderActivity();
+$("logout").onclick=()=>{localStorage.removeItem("luckProCurrent");location.href="auth.html"};
